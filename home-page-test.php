@@ -22,7 +22,7 @@
     }
 
     .owl-carousel .owl-nav.disabled {
-        display: block !important;
+        display: block;
     }
 
     .owl-nav span {
