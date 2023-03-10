@@ -26,7 +26,7 @@
     }
 
     .owl-nav span {
-        display: block !important;
+        display: block;
 
     }
 
