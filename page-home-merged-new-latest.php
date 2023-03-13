@@ -424,6 +424,27 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                                         $externalid = $employeedetails->externalId;
 
                                         $worduser = 'user_' . $externalid;
+
+                                        $tagone = "";
+                                        $tagtwo = "";
+                                        $tagthree = "";
+                                        $tagfour = "";
+                                        $tagfive = "";
+                                        if ($row->tag1 != null) {
+                                            $tagone = $row->tag1;
+                                        }
+                                        if ($row->tag2 != null) {
+                                            $tagtwo = " - " . $row->tag2;
+                                        }
+                                        if ($row->tag3 != null) {
+                                            $tagthree = " - " . $row->tag3;
+                                        }
+                                        if ($row->tag4 != null) {
+                                            $tagfour = " - " . $row->tag4;
+                                        }
+                                        if ($row->tag5 != null) {
+                                            $tagfive = " - " . $row->tag5;
+                                        }
                                     ?>
                                         <?php
                                         // if (get_field('approve', $worduser)) {
@@ -436,7 +457,7 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                                         ?>
 
 
-                                            <div class="item mainitem kd-service-slide" data-tags="<?php echo $tagone . $tagtwo . $tagthree . $tagfour . $tagfive; ?>" data-description="<?php echo $row->short_excerpt; ?>" data-expert = "<?php echo $employeedetails->firstName . " " . $employeedetails->lastName;  ?>" data-category="<?php echo $catResult->name; ?>" data-price="<?php echo $row->price; ?>" data-name="<?php echo $row->name; ?>">
+                                            <div class="item mainitem kd-service-slide" data-tags="<?php echo $tagone . $tagtwo . $tagthree . $tagfour . $tagfive; ?>" data-description="<?php echo $row->description; ?>" data-expert = "<?php echo $employeedetails->firstName . " " . $employeedetails->lastName;  ?>" data-category="<?php echo $catResult->name; ?>" data-price="<?php echo $row->price; ?>" data-name="<?php echo $row->name; ?>">
 
                                                 <div onmouseleave="kdAdddeactivatedThumb(event)" onmouseenter="kdOpenPopupFunc(event)" class="gallery-video-thumbnail kd-thumbnnail" data-id="<?php echo $servicesingleid; ?>">
                                                     <a data-id="<?php echo $servicesingleid; ?>">
