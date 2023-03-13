@@ -368,7 +368,8 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
         </div>
 
         <div class="kd-searchbox-result home-demo">
-            <div class="owl-carousel owl-theme kd-search-result-carousel">
+        <h3 id="myList" class="hometitle" id="kd-search-title"></h3>
+            <div class="owl-theme kd-search-result-carousel">
 
             </div>
         </div>
