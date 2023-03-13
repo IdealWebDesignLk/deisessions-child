@@ -1483,30 +1483,10 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
 
     <script>
         function openFullscreenVideo() {
-            let videoSrc = document.getElementById('fullscreen-youtube-video').src
-
-            document.querySelector('.full-screen-main-video').classList.remove('hidden')
-
-            console.log(player)
-            let startTime = Math.round(player.playerInfo.currentTime)
-            console.log(startTime)
-            videoSrc = `${videoSrc}&autoplay=1&start=${startTime}`
-            // document.querySelector('.full-screen-video-cont-wrapper').innerHTML = document.querySelector('.video-foreground').innerHTML
-            // setTimeout(() => {
-            document.getElementById('fullscreen-youtube-video').src = videoSrc
-            // }, 100);
-
-
+           let videoElement = document.getElementById('youtube-video')
+           videoElement.requestFullscreen()
         }
 
-        function closeFullSreenVid() {
-            let videoSrc = document.getElementById('fullscreen-youtube-video').src
-            let vidParts = videoSrc.split('&autoplay=1')
-            // console.log(vidParts)
-            document.getElementById('fullscreen-youtube-video').src = vidParts[0]
-            // document.querySelector('.full-screen-video-cont-wrapper').innerHTML = ""
-            document.querySelector('.full-screen-main-video').classList.add('hidden')
-        }
         // store event on variable
         let alreadyClicked = false
         document.addEventListener('click', () => {
