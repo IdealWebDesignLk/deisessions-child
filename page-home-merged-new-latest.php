@@ -362,11 +362,11 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                 </div>
                 <div class="kd-form-group">
                     <label>Search</label>
-                    <input type="text" id="kd-price-to" onkeyup="selectResultBasedTitle(event)">
+                    <input type="text" id="kd-search-field" onkeyup="selectResultBasedTitle(event)">
                 </div>
                 <div class="kd-form-group">
                     <label>&nbsp;</label>
-                    <button class="kd-reset-btn" onclick="resetSearch()">Reset Filters</button>
+                    <button class="kd-reset-btn" onclick="resetSearch(event)">Reset Filters</button>
                 </div>
             </form>
         </div>
