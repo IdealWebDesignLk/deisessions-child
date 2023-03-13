@@ -863,6 +863,7 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
         // store event on variable
         let alreadyClicked = false
         document.addEventListener('click', () => {
+            console.log('clicked')
             alreadyClicked = true
         })
 
