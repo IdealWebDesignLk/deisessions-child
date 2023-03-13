@@ -842,18 +842,6 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
     </div>
 
 
-    <!-- full screen top video -->
-
-    <div class="full-screen-main-video hidden">
-        <div class="full-screen-video-inner">
-
-            <iframe class="fullscreen-youtube-video" id="fullscreen-youtube-video" width="100%" height="1005" src=<?php echo  $finalHeroVidUrl; ?> title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <span class="close-full-screen-video" onclick="closeFullSreenVid()">x</span>
-        </div>
-    </div>
-
-
-
     <script>
         function openFullscreenVideo() {
             let videoElement = document.getElementById('youtube-video')
@@ -863,7 +851,7 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
         // store event on variable
         let alreadyClicked = false
         document.addEventListener('click', () => {
-            console.log('clicked')
+            // console.log('clicked')
             alreadyClicked = true
         })
 
@@ -1002,6 +990,9 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                     let videoImg = videoWrapper.querySelector('.single-video-paceholder-img')
 
                     let vidUrl = `${videoImg.dataset.finalurl}`
+
+                    console.log(alreadyClicked)
+                    console.log(vidUrl)
 
                     if (alreadyClicked) {
                         let CroppedUrl = videoImg.dataset.finalurl.split("&mute=1")[0]
