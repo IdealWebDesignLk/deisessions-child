@@ -290,18 +290,9 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
 
                         <!-- full screen  -->
                         <p id="kd-full-screen-video" onclick="openFullscreenVideo()" style="width: auto; " class=""><img class="change-src-on-hover" data-hoverimg="<?php echo $server_name . '/wp-content/uploads/2023/01/Property-1Hover.png' ?>" src="<?php echo $server_name . '/wp-content/uploads/2023/01/Property-1Expand.png' ?>"></p>
-
-                        <!-- 
-                         <p id="unmute"><img src="https://iwdsessions.com/wp-content/uploads/2023/01/SoundButton.png"></p>
-                        <p id="mute"><img src="https://iwdsessions.com/wp-content/uploads/2023/01/SoundButton-Copy.png"></p>
-
-                       			 
-
-                        <p id="kd-play-video" class=""><img src="https://iwdsessions.com/wp-content/uploads/2023/01/PlayButton-1.png"></p>
-                        <p id="kd-pause-video" class=""><img src="https://iwdsessions.com/wp-content/uploads/2023/01/PlayButton.png"></p> -->
-
-
                                 </div>
+
+
                                 <div class="container homebodysec">
                                     <div class="innerhomesecondrow">
                                         <div class="secondsec">
@@ -331,604 +322,13 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
 
 
                                     </div>
-                                    <form method="POST" class="searchform">
-
-                                        <div class="row">
-                                            <div class="col colsm6">
-                                                <div class="form-group">
-                                                    <input type="text" placeholder="Search" class="form-control" id="usr" name="searchtext">
-                                                </div>
-                                            </div>
-                                            <div class="col colsm6">
-                                                <div class="form-group">
-                                                    <select id="topick" name="topic">
-                                                        <option disabled selected>All Topic</option>
-                                                        <?php
-
-                                                        $servicecate = $wpdb->get_results("SELECT * FROM $tbprefix" . "amelia_categories");
-                                                        foreach ($servicecate as $row) {
-                                                            $servicecateid = $row->id;
-                                                            $servicecatename = $row->name;
-                                                            $excludecat = "Biases";
-                                                            if (strpos($servicecatename, $excludecat) !== false) {
-                                                                echo "<option value=" . $servicecateid . ">" . $servicecatename . "</option>";
-                                                            }
-                                                        }
-                                                        ?>
-
-
-                                                    </select>
-                                                    <input type="text" hidden placeholder="" class="form-control" id="usrcatname" name="catname">
-                                                </div>
-                                            </div>
-
-                                            <div class="col colsm6">
-                                                <div class="form-group">
-                                                    <input type="number" placeholder="Budget min" class="form-control" id="usr" name="budget">
-                                                </div>
-                                            </div>
-                                            <div class="col colsm6">
-                                                <div class="form-group">
-                                                    <input type="number" placeholder="Budget max" class="form-control" id="usr" name="budgetx">
-                                                </div>
-                                            </div>
-
-                                            <div class="col">
-                                                <div class="form-group">
-                                                    <button type="submit" name="submit" class="btn btn-primary">Search</button>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </form>
                                 </div>
                         </div>
             </div>
-
-            <?php
-
-            if (isset($_POST['submit'])) {
-                echo "";
-            ?>
-                <div class="searchandfilter">
-                    <p class="closeicon">X</p>
-                    <div class="searchresult">
-                        <?php
-
-
-                        $topic = $_POST["topic"];
-                        $budget = $_POST["budget"];
-                        $budgetx = $_POST["budgetx"];
-                        $timex = $_POST["timex"];
-                        $searchtext = $_POST["searchtext"];
-                        $topicz = $_POST["catname"];
-
-                        $topics = "";
-                        $budgets = "";
-                        $budgetxs = "";
-                        $timexs = "";
-                        $searchtexts = "";
-
-
-                        $query = "";
-
-                        if ($topic != "") {
-                            if ($query != "") {
-                                $query .= "categoryId LIKE '%$topic%'";
-                            } else {
-                                $query = "categoryId LIKE '%$topic%'";
-                            }
-                            $topics = $topicz;
-                        }
-                        if ($budget != "" || $budgetx != "") {
-                            if ($budget == "") {
-                                $budget = 0;
-                            }
-                            if ($budgetx == "") {
-                                $budgetx = 1000000;
-                            }
-                            if ($query != "") {
-                                $query .= " AND price BETWEEN '$budget' AND '$budgetx' ";
-                            } else {
-                                $query = "price BETWEEN '$budget' AND '$budgetx'";
-                            }
-                            if ($budget == 0) {
-                                $budget = "";
-                            }
-                            if ($budgetx == 1000000) {
-                                $budgetx = "";
-                            }
-                            $budgets = $budget;
-                            $budgetxs = $budgetx;
-                        }
-                        // if ($budgetx != "") {
-                        //     if ($query != "") {
-                        //         $query .= " or name LIKE ";
-                        //     } else {
-                        //         $query = "name LIKE '%$budgetx%'";
-                        //     }
-                        //     $budgetxs = $budgetx;
-                        // }
-                        if ($timex != "") {
-                            if ($query != "") {
-                                $query .= " AND duration LIKE '%$timex%'";
-                            } else {
-                                $query = "duration LIKE '%$timex%'";
-                            }
-                            $timexs = $timex;
-                        }
-                        if ($searchtext != "") {
-                            if ($query != "") {
-                                $query .= " AND name LIKE '%$searchtext%' or description LIKE '%$searchtext%'";
-                            } else {
-                                $query = "name LIKE '%$searchtext%' or description LIKE '%$searchtext%'";
-                            }
-                            $searchtexts = $searchtext;
-                        }
-
-
-                        // echo "SELECT * FROM $tbprefix"."amelia_services WHERE " . $query . ";";
-
-
-                        $db_item =  $wpdb->get_results($wpdb->prepare("SELECT * FROM $tbprefix" . "amelia_services WHERE " . $query . ";"));
-                        $fnameandlastnam = "";
-
-                        //                 echo $db_item->num_rows . "qqqqqqqqqq";
-                        if (!empty($db_item)) {
-                        ?>
-                            <form method="POST" class="filterform">
-                                <div class="row filter">
-                                    <input type="hidden" name="topicid" value="<?php echo $topic ?>">
-                                    <input type="hidden" name="fsearchtxt" value="<?php echo $searchtext ?>">
-                                    <input type="hidden" name="fcatname" value="<?php echo $topicz ?>">
-                                    <input type="hidden" name="fbudgetmin" value="<?php echo $budget ?>">
-                                    <input type="hidden" name="fbudgetmax" value="<?php echo $budgetx ?>">
-
-                                    <div class="col dds hidecol">
-                                        <div class="form-group">
-                                            <label class="filter-lab">Date</label>
-                                            <input type="Date" placeholder="Date" class="form-control" id="Date" name="Date">
-                                        </div>
-                                    </div>
-                                    <div class="col colsm6 hidecol">
-                                        <div class="form-group">
-                                            <label class="filter-lab">Time from</label>
-                                            <input type="time" placeholder="Time from" class="form-control" id="Timefrom" name="Timefrom">
-
-                                        </div>
-                                    </div>
-                                    <div class="col colsm6 hidecol">
-                                        <div class="form-group">
-                                            <label class="filter-lab">Time to</label>
-                                            <input type="time" placeholder="Time to" class="form-control" id="Timeto" name="Timeto">
-                                        </div>
-                                    </div>
-                                    <div class="col colsm6">
-                                        <div class="form-group">
-                                            <label class="filter-lab">Sort by price</label>
-                                            <select id="Prize" name="Prize">
-                                                <option disabled selected>Price</option>
-                                                <option value="Accending">Ascending</option>
-                                                <option value="Decending">Descending</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col colsm6">
-                                        <div class="form-group">
-                                            <label class="filter-lab">Sort by rating</label>
-                                            <select id="Rating" name="Rating">
-                                                <option disabled selected>Rating</option>
-                                                <option value="Accending">Ascending</option>
-                                                <option value="Decending">Descending</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <label class="filter-lab"></label>
-                                            <button type="submit" name="filterbtn" class="btn btn-primary filter">Filter</button>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </form>
-                            <?php echo "<div class='serchs'> <h2>Search Terms: <strong>" . $topics . "</strong> <strong>" . $budgets . "</strong> <strong>" . $budgetxs . "</strong> <strong>" . $timexs . "</strong> <strong>" . $searchtext . "</strong></h2></div>"; ?>
-                            <div class="cardmain">
-
-                                <?php
-                                foreach ($db_item as $row) {
-
-                                ?>
-
-                                    <div class="card">
-                                        <?php
-                                        $videourl1 =  $row->video;
-                                        $parameters1 = "?controls=1&showinfo=0&rel=0&loop=1&mute=1&modestbranding=1";
-                                        $finalurl1 =  "https://www.youtube.com/embed/" . $videourl1 . $parameters1;
-                                        $sid =  $row->id;
-
-                                        $slug2 = sanitize_title($row->name) . '-' . $sid;
-                                        $url =  $server_name . '/single-service/' . $slug2;
-                                        ?>
-                                        <a href="<?php echo $url; ?>">
-                                            <iframe class="carouselvideo" src=<?php echo $finalurl1; ?>></iframe>
-
-
-                                            <div class="container">
-                                                <?php
-
-                                                $employee =  $wpdb->get_results("SELECT * FROM $tbprefix" . "amelia_services inner join  " . $tbprefix . "amelia_providers_to_services inner join  " . $tbprefix . "amelia_users on " . $tbprefix . "amelia_services.id=" . $tbprefix . "amelia_providers_to_services.serviceId and " . $tbprefix . "amelia_providers_to_services.userId=" . $tbprefix . "amelia_users.id where " . $tbprefix . "amelia_services.id='$sid'");
-                                                foreach ($employee as $employeedetails) {
-                                                    $fnameandlastname =  $employeedetails->firstName . " " . $employeedetails->lastName;
-                                                }
-                                                ?>
-                                                <p class="cardauthor"><?php echo $fnameandlastname ?></p>
-                                                <h4 class="sessionttile"><b><?php echo $row->name; ?></b></h4>
-                                                <p class="pricesession">60 minutes / <?php echo do_shortcode('[woo_multi_currency_exchange price="' . $row->price . '" currency="' . $curr . '"]'); ?></p>
-                                                <p class="views">362.440 Views</p>
-                                                <p class="paratext"><?php echo do_shortcode($row->description); ?></p>
-                                            </div>
-                                        </a>
-                                    </div>
-                            <?php
-
-                                }
-                            } else {
-                                echo "<div class='nores'> <h3>No result found </h3></div>";
-                            }
-                            ?>
-                            </div>
-                    </div>
-                </div>
-                <?php
-
-            } else {
-
-                if (isset($_POST['filterbtn'])) {
-
-                    $ftopic = $_POST["topicid"];
-                    $searchtext = $_POST["fsearchtxt"];
-                    $topicz = $_POST["fcatname"];
-                    $budget = $_POST["fbudgetmin"];
-                    $budgetx = $_POST["fbudgetmax"];
-
-                ?>
-
-                    <div class="searchandfilter">
-                        <p class="closeicon">X</p>
-                        <div class="searchresult">
-                            <form method="POST" class="filterform">
-                                <div class="row filter">
-                                    <input type="hidden" name="topicid" value="<?php echo $ftopic ?>">
-                                    <input type="hidden" name="fsearchtxt" value="<?php echo $searchtext ?>">
-                                    <input type="hidden" name="fcatname" value="<?php echo $topicz ?>">
-                                    <input type="hidden" name="fbudgetmin" value="<?php echo $budget ?>">
-                                    <input type="hidden" name="fbudgetmax" value="<?php echo $budgetx ?>">
-
-                                    <div class="col dds hidecol">
-                                        <div class="form-group">
-                                            <input type="Date" placeholder="Date" class="form-control" id="Date" name="Date" value="<?php echo $_POST["Date"]; ?>">
-                                        </div>
-                                    </div>
-                                    <div class="col colsm6 hidecol">
-                                        <div class="form-group">
-                                            <input type="time" placeholder="Time from" class="form-control" id="Timefrom" name="Timefrom" value="<?php echo $_POST["Timefrom"]; ?>">
-                                        </div>
-                                    </div>
-                                    <div class="col colsm6 hidecol">
-                                        <div class="form-group">
-                                            <input type="time" placeholder="Time to" class="form-control" id="Timeto" name="Timeto" value="<?php echo $_POST["Timeto"]; ?>">
-                                        </div>
-                                    </div>
-                                    <div class="col colsm6">
-                                        <div class="form-group">
-                                            <select id="Prize" name="Prize">
-                                                <option disabled selected>Price</option>
-                                                <option value="Accending">Ascending</option>
-                                                <option value="Decending">Descending</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col colsm6">
-                                        <div class="form-group">
-                                            <select id="Rating" name="Rating">
-                                                <option disabled selected>Rating</option>
-                                                <option value="Accending">Ascending</option>
-                                                <option value="Decending">Descending</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col">
-                                        <div class="form-group">
-                                            <button type="submit" name="filterbtn" class="btn btn-primary filter">Filter</button>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </form>
-                            <?php
-
-                            $zftopic = $_POST["topicid"];
-                            $zsearchtext = $_POST["fsearchtxt"];
-                            $ztopicz = $_POST["fcatname"];
-                            $zbudget = $_POST["fbudgetmin"];
-                            $zbudgetx = $_POST["fbudgetmax"];
-
-                            $fdate = $_POST["Date"];
-                            $ftimestart = $_POST["Timefrom"];
-                            $ftimeend = $_POST["Timeto"];
-                            $fprice = $_POST["Prize"];
-                            $frating = $_POST["Rating"];
-
-                            $arrdate = explode("-", $fdate);
-
-
-
-
-                            if ($ftimestart != "") {
-                                $ftimetrim1  = str_replace(":", "", $ftimestart);
-                                $ftimefrom  = $ftimetrim1 . '00';
-                            }
-                            if ($ftimeend != "") {
-                                $ftimetrim2  = str_replace(":", "", $ftimeend);
-                                $ftimeto  = $ftimetrim2 . '00';
-                            }
-                            echo $ftimefrom . "<br>";
-                            echo $ftimeto;
-
-
-                            $timestamp = strtotime($_POST["Date"]);
-                            $ffdate = date("l", $timestamp);
-
-                            // $ffdate = "";
-                            if ($fdate == "Monday") {
-                                $ffdate = "1";
-                            } else if ($fdate == "Tuesday") {
-                                $ffdate = "2";
-                            } else if ($fdate == "Wednesday") {
-                                $ffdate = "3";
-                            } else if ($fdate == "Thursday") {
-                                $ffdate = "4";
-                            } else if ($fdate == "Friday") {
-                                $ffdate = "5";
-                            } else {
-                                $ffdate = "";
-                            }
-
-                            $topics = "";
-                            $budgets = "";
-                            $budgetxs = "";
-                            $timexs = "";
-                            $searchtexts = "";
-
-
-                            $query = "";
-                            $endquery = "";
-                            $quaryselector = "";
-                            $querydate = "";
-                            $querytime = "";
-
-
-                            if ($zftopic != "") {
-                                if ($query != "") {
-                                    $query .= "categoryId LIKE '%$zftopic%' ";
-                                } else {
-                                    $query = "categoryId LIKE '%$zftopic%' ";
-                                }
-                                $topics = $ztopicz;
-                            }
-                            if ($zbudget != "" || $zbudgetx != "") {
-                                if ($zbudget == "") {
-                                    $zbudget = 0;
-                                }
-                                if ($zbudgetx == "") {
-                                    $zbudgetx = 1000000;
-                                }
-                                if ($query != "") {
-                                    $query .= " AND price BETWEEN '$zbudget' AND '$zbudgetx' ";
-                                } else {
-
-                                    $query = "price BETWEEN '$zbudget' AND '$zbudgetx'";
-                                }
-                                if ($zbudget == 0) {
-                                    $zbudget = "";
-                                }
-                                if ($zbudgetx == 1000000) {
-                                    $zbudgetx = "";
-                                }
-                                $budgets = $zbudget;
-                                $budgetxs = $zbudgetx;
-                            }
-
-                            if ($ztimex != "") {
-                                if ($query != "") {
-                                    $query .= " AND duration LIKE '%$ztimex%'";
-                                } else {
-                                    $query = "duration LIKE '%$ztimex%'";
-                                }
-                                $timexs = $ztimex;
-                            }
-                            if ($zsearchtext != "") {
-                                if ($query != "") {
-                                    $query .= " AND name LIKE '%$zsearchtext%' or description LIKE '%$zsearchtext%'";
-                                } else {
-                                    $query = "name LIKE '%$zsearchtext%' or description LIKE '%$zsearchtext%'";
-                                }
-                                $searchtexts = $zsearchtext;
-                            }
-                            if ($fprice == "Decending") {
-                                $endquery = " ORDER BY price DESC";
-                            } else if ($fprice == "Accending") {
-                                $endquery = " ORDER BY price ASC";
-                            }
-                            if ($frating == "Decending") {
-                                $fendquery = " ORDER BY starreview DESC";
-                            } else if ($frating == "Accending") {
-                                $fendquery = " ORDER BY starreview ASC";
-                            }
-
-
-                            echo "<div class='serchs'> <h2>Search Terms: <strong>" . $topics . "</strong> <strong>" . $budgets . "</strong> <strong>" . $budgetxs . "</strong> <strong>" . $timexs . "</strong> <strong>" . $searchtext . "</strong></h2></div>";
-
-                            if ($frating == "") {
-                                // echo "SELECT * FROM $tbprefix"."amelia_services WHERE " . $query . $endquery . ";";
-                                $quaryselector = "SELECT * FROM $tbprefix" . "amelia_services WHERE " . $query . $endquery . ";";
-                            } else {
-                                if ($frating != "" && $fprice != "") {
-                                    $fendquery = " , starreview ASC";
-                                    // echo "SELECT * FROM $tbprefix"."amelia_services JOIN review_details ON ".$tbprefix."amelia_services.id = review_details.service_id WHERE " . $query . $endquery . $fendquery . ";";
-                                    $quaryselector = "SELECT * FROM $tbprefix" . "amelia_services JOIN review_details ON " . $tbprefix . "amelia_services.id = review_details.service_id WHERE " . $query . $endquery . $fendquery . ";";
-                                } else {
-                                    // echo "SELECT * FROM $tbprefix"."amelia_services JOIN review_details ON ".$tbprefix."amelia_services.id = review_details.service_id WHERE " . $query . $endquery . $fendquery . ";";
-                                    $quaryselector = "SELECT * FROM $tbprefix" . "amelia_services JOIN review_details ON " . $tbprefix . "amelia_services.id = review_details.service_id WHERE " . $query . $endquery . $fendquery . ";";
-                                }
-                            }
-
-                            $db_item =  $wpdb->get_results($wpdb->prepare($quaryselector));
-                            $fnameandlastnam = "";
-
-                            //echo $db_item->num_rows . "qqqqqqqqqq";
-                            if (!empty($db_item)) {
-
-                            ?>
-                                <div class="cardmain">
-                                    <?php
-                                    foreach ($db_item as $row) {
-
-                                        if ($ffdate != "" || $ftimefrom != "" || $ftimeto != "") {
-
-                                            if ($ffdate != "") {
-                                                // $querydate = " and ".$tbprefix."amelia_providers_to_weekdays.dayIndex = 3" . $ffdate;
-                                                $querydate = " and " . $tbprefix . "amelia_providers_to_weekdays.dayIndex = 3";
-                                            }
-                                            if ($ftimefrom != "" || $ftimeto != "") {
-                                                if ($ftimefrom == "") {
-                                                    $ftimefrom = 90000;
-                                                }
-                                                if ($ftimeto == "") {
-                                                    $ftimeto = 180000;
-                                                }
-
-                                                $querytime = "AND (CAST(" . $tbprefix . "amelia_providers_to_weekdays.startTime AS int) >= " . $ftimefrom . " or
-                                    CAST(" . $tbprefix . "amelia_providers_to_weekdays.endTime AS int) <= " . $ftimeto . ")";
-                                            }
-
-                                            $quaryselector2 = "SELECT
-                            " . $tbprefix . "amelia_providers_to_services.userId,
-                            " . $tbprefix . "amelia_services.id,
-                            " . $tbprefix . "amelia_providers_to_weekdays.dayIndex,
-                            " . $tbprefix . "amelia_providers_to_weekdays.startTime,
-                            " . $tbprefix . "amelia_providers_to_weekdays.endTime
-                            FROM
-                            " . $tbprefix . "amelia_services inner join
-                            " . $tbprefix . "amelia_providers_to_services inner join
-                            " . $tbprefix . "amelia_providers_to_weekdays
-                            on
-                            " . $tbprefix . "amelia_services.id=" . $tbprefix . "amelia_providers_to_services.serviceId and
-                            " . $tbprefix . "amelia_providers_to_services.userId=" . $tbprefix . "amelia_providers_to_weekdays.userId
-                            where " . $tbprefix . "amelia_services.id=" . $row->id . " " . $querydate . " " . $querytime . ";";
-                                            $flag = true;
-                                            $db_item2 =  $wpdb->get_results($wpdb->prepare($quaryselector2));
-                                            if (!empty($db_item2)) {
-                                                foreach ($db_item2 as $row2) {
-                                                    if ($flag) {
-                                    ?>
-                                                        <div class="card">
-                                                            <?php
-                                                            $videourl1 =  $row->video;
-                                                            $parameters1 = "?controls=1&showinfo=0&rel=0&loop=1&mute=1&modestbranding=1";
-                                                            $finalurl1 =  "https://www.youtube.com/embed/" . $videourl1 . $parameters1;
-                                                            $sid =  $row->id;
-
-                                                            $slug3 = sanitize_title($row->name) . '-' . $sid;
-                                                            $url = $server_name . '/single-service/' . $slug3;
-                                                            ?>
-                                                            <a href="<?php echo $url; ?>">
-                                                                <iframe class="carouselvideo" src=<?php echo $finalurl1; ?>></iframe>
-
-
-                                                                <div class="container">
-                                                                    <?php
-
-                                                                    $employee =  $wpdb->get_results("SELECT * FROM $tbprefix" . "amelia_services inner join " . $tbprefix . "amelia_providers_to_services inner join " . $tbprefix . "amelia_users on " . $tbprefix . "amelia_services.id=" . $tbprefix . "amelia_providers_to_services.serviceId and " . $tbprefix . "amelia_providers_to_services.userId=" . $tbprefix . "amelia_users.id where " . $tbprefix . "amelia_services.id='$sid'");
-                                                                    foreach ($employee as $employeedetails) {
-                                                                        $fnameandlastname =  $employeedetails->firstName . " " . $employeedetails->lastName;
-                                                                    }
-                                                                    ?>
-                                                                    <p class="cardauthor"><?php echo $fnameandlastname ?></p>
-                                                                    <h4 class="sessionttile"><b><?php echo $row->name; ?></b></h4>
-                                                                    <p class="pricesession">60 minutes / <?php echo do_shortcode('[woo_multi_currency_exchange price="' . $row->price . '" currency="' . $curr . '"]'); ?></p>
-
-                                                                    <p class="views">362.440 Views</p>
-                                                                    <p class="paratext"><?php echo do_shortcode($row->description); ?></p>
-                                                                </div>
-                                                            </a>
-                                                        </div>
-                                            <?php
-                                                        $flag = false;
-                                                    }
-                                                }
-                                            }
-                                        } else {
-                                            // echo "<div class='nores'> <h3>No filter result found </h3></div>";
-                                            ?>
-                                            <div class="card">
-                                                <?php
-                                                $videourl1 =  $row->video;
-                                                $parameters1 = "?controls=1&showinfo=0&rel=0&loop=1&mute=1&modestbranding=1";
-                                                $finalurl1 =  "https://www.youtube.com/embed/" . $videourl1 . $parameters1;
-                                                $sid =  $row->id;
-
-                                                $slug4 = sanitize_title($row->name) . '-' . $sid;
-                                                $url = $server_name . '/single-service/' . $slug4;
-                                                ?>
-                                                <a href="<?php echo $url; ?>">
-                                                    <iframe class="carouselvideo" src=<?php echo $finalurl1; ?>></iframe>
-
-
-                                                    <div class="container">
-                                                        <?php
-
-                                                        $employee =  $wpdb->get_results("SELECT * FROM $tbprefix" . "amelia_services inner join " . $tbprefix . "amelia_providers_to_services inner join " . $tbprefix . "amelia_users on " . $tbprefix . "amelia_services.id=" . $tbprefix . "amelia_providers_to_services.serviceId and " . $tbprefix . "amelia_providers_to_services.userId=" . $tbprefix . "amelia_users.id where " . $tbprefix . "amelia_services.id='$sid'");
-                                                        foreach ($employee as $employeedetails) {
-                                                            $fnameandlastname =  $employeedetails->firstName . " " . $employeedetails->lastName;
-                                                        }
-                                                        ?>
-                                                        <p class="cardauthor"><?php echo $fnameandlastname ?></p>
-                                                        <h4 class="sessionttile"><b><?php echo $row->name; ?></b></h4>
-                                                        <p class="pricesession">60 minutes / <?php echo do_shortcode('[woo_multi_currency_exchange price="' . $row->price . '" currency="' . $curr . '"]'); ?></p>
-
-                                                        <p class="views">362.440 Views</p>
-                                                        <p class="paratext"><?php echo do_shortcode($row->description); ?></p>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                    <?php
-                                        }
-                                    }
-                                    ?>
-                                </div>
-                            <?php
-                            } else {
-                                echo "<div class='nores'> <h3>No result found using filter fields </h3></div>";
-                            }
-                            ?>
-                        </div>
-                    </div>
-        </div>
-
-    <?php
-
-                } else {
-                }
-    ?>
-
-<?php
-            }
-?>
     </main>
 
 
+    <!-- ====================================================================================== -->
     <!-- kd new search box -->
     <div class="container-fluidx background-black kd-new-search-box">
         <div class="kd-searchbox-inner">
@@ -936,7 +336,7 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                 <div class="kd-form-group">
                     <label>Category</label>
                     <select name="kd-search-category" id="kd-search-ccategory" onchange="selectResultBasedCategory(event)">
-                    <option value="select-category">Select Category</option>
+                        <option value="select-category">Select Category</option>
                         <?php
 
                         global $wpdb;
@@ -967,12 +367,14 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
             </form>
         </div>
 
-        <div class="kd-searchbox-result">
+        <div class="kd-searchbox-result home-demo">
             <div class="owl-carousel owl-theme kd-search-result-carousel">
 
             </div>
         </div>
     </div>
+
+ <!-- ====================================================================================== -->
 
     <div class="container-fluidx background-black">
 
@@ -984,13 +386,8 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
         $catResults = $wpdb->get_results($categoriesSql);
         $exclude_cat_id = array(17, 23, 19, 12, 9, 8, 18, 4, 12, 44, 28, 29, 42, 41, 40);
         foreach ($catResults as $catResult) {
-
-            // print_r($catResult->categoryId);
-
-            // 					start if cluse that checks if the category is 12
-            //if (intval($catResult->id) != 17 || intval($catResult->id) != 23) {
             if (!in_array(intval($catResult->id), $exclude_cat_id)) {
-                // 					start if cluse that checks if the category is 12
+
         ?>
                 <div class="home-demo deskcarousel kd-single-services-section">
 
@@ -1002,7 +399,7 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                     $results = $wpdb->get_results("SELECT * FROM $tbprefix" . "amelia_services where status='visible' and categoryId='" . $catResult->id . "'");
                     if (!empty($results)) { ?>
 
-                        <div class="owl-carousel owl-theme" >
+                        <div class="owl-carousel owl-theme">
                             <?php
 
                             $results = $wpdb->get_results("SELECT * FROM $tbprefix" . "amelia_services where status='visible' and categoryId='" . $catResult->id . "' ORDER BY `position`;");
@@ -1035,7 +432,7 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                                         ?>
 
 
-                                            <div class="item mainitem kd-service-slide" data-category="<?php echo $catResult->name; ?>" data-price="<?php echo $row->price; ?>" data-name="<?php echo $row->name; ?>" >
+                                            <div class="item mainitem kd-service-slide" data-category="<?php echo $catResult->name; ?>" data-price="<?php echo $row->price; ?>" data-name="<?php echo $row->name; ?>">
 
                                                 <div onmouseleave="kdAdddeactivatedThumb(event)" onmouseenter="kdOpenPopupFunc(event)" class="gallery-video-thumbnail kd-thumbnnail" data-id="<?php echo $servicesingleid; ?>">
                                                     <a data-id="<?php echo $servicesingleid; ?>">
@@ -1044,10 +441,6 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                                                     <div class="thumb-info">
                                                         <h4 class="sessionttile-thumb"><b><?php echo $row->name; ?></b></h4>
 
-                                                        <!-- <p style="top: -63px !important;" class="pricesession-thumb newprice"> -->
-
-
-                                                        <!-- </p> -->
                                                         <div class="viewsandpricediv">
                                                             <?php if (!empty($row->videoViews) && intval($row->videoViews) > 0) { ?>
                                                                 <span class="views"><?php echo number_format($row->videoViews, 0, '.', ','); ?></span> <span class="viewstext">Youtube Views</span>
@@ -1059,13 +452,9 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                                                         $oFormatter = new \NumberFormatter('de_DE', \NumberFormatter::CURRENCY);
                                                         $formattedPrice = $oFormatter->formatCurrency($row->price, 'EUR');
 
-                                                        //echo $formattedPrice;
-
                                                         ?>
 
                                                     </div>
-                                                    <!-- <a href=<?php //echo $url; 
-                                                                    ?>></a> -->
                                                 </div>
 
                                             </div>
@@ -1438,53 +827,11 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
     </div>
 
 
-    <!--<div class="mainbody logosec">
-        <div class="subrow">
-            <div class="row">
-                <div class="ab-title tb">Trusted Brands</div>
-            </div>
-
-            <div class="row brands">
-                <div class="owl-carousel owl-theme brandcarousel">
-                    <div class="item">
-                        <img src="https://iwdsessions.com/wp-content/uploads/2023/01/Ebay900x500.png" style="">
-                    </div>
-                    <div class="item">
-                        <img src="https://iwdsessions.com/wp-content/uploads/2023/01/Heineken900x500-2.png" style="">
-                    </div>
-                    <div class="item">
-                        <img src="https://iwdsessions.com/wp-content/uploads/2023/01/kpmg900x500.png" style="">
-                    </div>
-                    <div class="item">
-                        <img src="https://iwdsessions.com/wp-content/uploads/2023/01/loreal900x500.png" style="">
-                    </div>
-                    <div class="item">
-                        <img src="https://iwdsessions.com/wp-content/uploads/2023/01/randstad900x400.png" style="">
-                    </div>
-                    <div class="item">
-                        <img src="https://iwdsessions.com/wp-content/uploads/2023/01/tinywow_salesforce-transparent-logov7.png" style="">
-                    </div>
-                    <div class="item">
-                        <img src="https://iwdsessions.com/wp-content/uploads/2023/01/ubs900x500black.png" style="">
-                    </div>
-
-
-                </div>
-            </div>
-        </div>
-    </div>
-			-->
-
-
-    
-
-
-
 
     <script>
         function openFullscreenVideo() {
-           let videoElement = document.getElementById('youtube-video')
-           videoElement.requestFullscreen()
+            let videoElement = document.getElementById('youtube-video')
+            videoElement.requestFullscreen()
         }
 
         // store event on variable
