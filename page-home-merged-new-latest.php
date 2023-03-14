@@ -361,11 +361,11 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                         } ?>
                     </select>
                 </div>
-
+<!-- 
                 <div class="kd-form-group">
                     <label>Min Price</label>
                     <input type="number" id="kd-price-from" onchange="selectResultBasedPrice(event)" onkeyup="selectResultBasedPrice(event)">
-                </div>
+                </div> -->
                 <div class="kd-form-group">
                     <label>Max Price</label>
                     <input type="number" id="kd-price-to" onchange="selectResultBasedPrice(event)" onkeyup="selectResultBasedPrice(event)">
@@ -374,6 +374,12 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                     <label>Search</label>
                     <input type="text" id="kd-search-field" onkeyup="selectResultBasedTitle(event)">
                 </div>
+
+                <div class="kd-form-group">
+                    <label>Time</label>
+                    <input type="date-time" id="kd-time" onchange="selectResultBasedDate(event)">
+                </div>
+
                 <div class="kd-form-group">
                     <label>&nbsp;</label>
                     <button class="kd-reset-btn" onclick="resetSearch(event)">Reset Filters</button>
