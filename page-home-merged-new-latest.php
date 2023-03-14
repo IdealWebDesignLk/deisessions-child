@@ -657,7 +657,7 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                                                     <div class="booking-widget-wrapper">
                                                         <div class="booking-widget">
                                                             <?php echo do_shortcode('[ameliastepbooking trigger="amelia-popup-' . $servicesingleid . '" service="' . $servicesingleid . '"]'); ?>
-                                                            <button class="hidden" id="amelia-popup-<?php echo $servicesingleid; ?>">
+                                                            <button class="hidden kd-amelia-popup-button-inst" id="amelia-popup-<?php echo $servicesingleid; ?>">
                                                                 Click Here
                                                             </button>
                                                         </div>
@@ -862,7 +862,7 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
         let alreadyClicked = false
         document.addEventListener('click', (e) => {
             console.log(e.target)
-            if (!e.target.classList.contains("kd-popup-content")) {
+            if (!e.target.classList.contains("kd-amelia-popup-button-inst")) {
                 console.log('clicked')
                 alreadyClicked = true
             }
