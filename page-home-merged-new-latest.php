@@ -340,7 +340,7 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                             $excludecateid = ot_get_option('exclude_category_id_s');
                       }
                     ?>
-                                            <h2 class="cateids"><?php echo $excludecateid; ?></h2>
+                                            <h2 class="cateids"><?php //echo $excludecateid; ?></h2>
                         
                     <label>Category</label>
                     <select name="kd-search-category" id="kd-search-ccategory" onchange="selectResultBasedCategory(event)">
