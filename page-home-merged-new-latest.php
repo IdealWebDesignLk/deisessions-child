@@ -343,6 +343,10 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                                            
                         
                     <label>Category</label>
+                    <?php
+                      $testecludeid = array($excludecateid);   
+                        echo "testcateid".$testecludeid;
+                    ?>
                     <select name="kd-search-category" id="kd-search-ccategory" onchange="selectResultBasedCategory(event)">
                         <option value="select-category">Select Category</option>
                         <?php
@@ -350,8 +354,9 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                         global $wpdb;
                         $categoriesSql = "SELECT * FROM $tbprefix" . "amelia_categories GROUP BY `id` ORDER BY `position`;";
                         $catResults = $wpdb->get_results($categoriesSql);
-                                   
-                        $exclude_cat_id = array($excludecateid);
+                      
+                        $exclude_cat_id = array(17, 23, 19, 12, 9, 8, 18, 4, 12, 44, 28, 29, 42, 41, 40);
+                        echo "excludecate".$exclude_cat_id;
                         foreach ($catResults as $catResult) {
                             if (!in_array(intval($catResult->id), $exclude_cat_id)) {
                         ?>
