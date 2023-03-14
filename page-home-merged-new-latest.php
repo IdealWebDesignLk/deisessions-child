@@ -334,21 +334,11 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
         <div class="kd-searchbox-inner">
             <form action="" id="kd-search-form" class="kd-search-form">
                 <div class="kd-form-group">
-                       <?php
-    $excludecateid;
-                      if (ot_get_option('exclude_category_id_s')) {
-                            $excludecateid = ot_get_option('exclude_category_id_s');
-                      }
-                    ?>
+                     
                                            
                         
                     <label>Category</label>
-                    <?php
-                      $testecludeid = array($excludecateid); 
-                     $exclude_cat_id1 = array(17, 23, 19, 12, 9, 8, 18, 4, 12, 44, 28, 29, 42, 41, 40);
-                        echo "testcateid".$testecludeid;
-                       echo "excludecateid".$exclude_cat_id1;
-                    ?>
+                  
                     <select name="kd-search-category" id="kd-search-ccategory" onchange="selectResultBasedCategory(event)">
                         <option value="select-category">Select Category</option>
                         <?php
@@ -358,7 +348,11 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                         $catResults = $wpdb->get_results($categoriesSql);
                       
                         //$exclude_cat_id = array(17, 23, 19, 12, 9, 8, 18, 4, 12, 44, 28, 29, 42, 41, 40);
-                      $exclude_cat_id = explode(',', ot_get_option('exclude_category_id_s'));
+                       $exclude_cat_id;
+                       if (ot_get_option('exclude_category_id_s')) {
+                            $exclude_cat_id = explode(',', ot_get_option('exclude_category_id_s'));
+                      }
+                      
                         foreach ($catResults as $catResult) {
                             if (!in_array(intval($catResult->id), $exclude_cat_id)) {
                         ?>
