@@ -334,8 +334,13 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
         <div class="kd-searchbox-inner">
             <form action="" id="kd-search-form" class="kd-search-form">
                 <div class="kd-form-group">
-                       
-                                            <h2 class="cateids"><?php echo get_field('category'); ?></h2>
+                       <?php
+    $excludecateid;
+                      if (ot_get_option('exclude_category_id_s')) {
+                            $excludecateid = ot_get_option('exclude_category_id_s');
+                      }
+                    ?>
+                                            <h2 class="cateids"><?php echo $excludecateid; ?></h2>
                         
                     <label>Category</label>
                     <select name="kd-search-category" id="kd-search-ccategory" onchange="selectResultBasedCategory(event)">
