@@ -332,64 +332,67 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
     <!-- kd new search box -->
     <div class="container-fluidx background-black kd-new-search-box">
         <div class="kd-new-searchbox-inner">
-        <div class="kd-searchbox-inner">
-            <form action="" id="kd-search-form" class="kd-search-form">
-                <div class="kd-form-group">
-                     
-                                           
-                        
-                    <label>Category</label>
-                  
-                    <select name="kd-search-category" id="kd-search-ccategory" onchange="selectResultBasedCategory(event)">
-                        <option value="select-category">Select Category</option>
-                        <?php
+            <div class="kd-searchbox-inner">
+                <form action="" id="kd-search-form" class="kd-search-form">
+                    <div class="kd-form-group">
 
-                        global $wpdb;
-                        $categoriesSql = "SELECT * FROM $tbprefix" . "amelia_categories GROUP BY `id` ORDER BY `position`;";
-                        $catResults = $wpdb->get_results($categoriesSql);
-                      
-                        //$exclude_cat_id = array(17, 23, 19, 12, 9, 8, 18, 4, 12, 44, 28, 29, 42, 41, 40);
-                       $exclude_cat_id;
-                       if (ot_get_option('exclude_category_id_s')) {
-                            $exclude_cat_id = explode(',', ot_get_option('exclude_category_id_s'));
-                      }
-                      
-                        foreach ($catResults as $catResult) {
-                            if (!in_array(intval($catResult->id), $exclude_cat_id)) {
-                        ?>
-                                <option value="<?php echo $catResult->name; ?>"><?php echo $catResult->name; ?></option>
-                        <?php }
-                        } ?>
-                    </select>
-                </div>
+                        <label>Category</label>
 
-                <div class="kd-form-group">
-                    <label>Max Price</label>
-                    <input type="number" id="kd-price-to" onchange="selectResultBasedPrice(event)" onkeyup="selectResultBasedPrice(event)">
-                </div>
-                <div class="kd-form-group">
-                    <label>Search</label>
-                    <input type="text" id="kd-search-field" onkeyup="selectResultBasedTitle(event)">
-                </div>
+                        <select name="kd-search-category" id="kd-search-ccategory" onchange="selectResultBasedCategory(event)">
+                            <option value="select-category">Select Category</option>
+                            <?php
 
-                <div class="kd-form-group">
-                    <label>Date Time</label>
-                    <input type="text" id="kd-date-time-field" onchange="get_available_dates(event)">
-                </div>
+                            global $wpdb;
+                            $categoriesSql = "SELECT * FROM $tbprefix" . "amelia_categories GROUP BY `id` ORDER BY `position`;";
+                            $catResults = $wpdb->get_results($categoriesSql);
 
-                <div class="kd-form-group">
-                    <label>&nbsp;</label>
-                    <button class="kd-reset-btn" onclick="resetSearch(event)">Reset Filters</button>
-                </div>
-            </form>
-        </div>
+                            //$exclude_cat_id = array(17, 23, 19, 12, 9, 8, 18, 4, 12, 44, 28, 29, 42, 41, 40);
+                            $exclude_cat_id;
+                            if (ot_get_option('exclude_category_id_s')) {
+                                $exclude_cat_id = explode(',', ot_get_option('exclude_category_id_s'));
+                            }
 
-        <div class="kd-searchbox-result home-demo">
-            <h3 class="hometitle kd-search-title d-none" id="myList">Search results</h3>
-            <div class="owl-theme kd-search-result-carousel">
+                            foreach ($catResults as $catResult) {
+                                if (!in_array(intval($catResult->id), $exclude_cat_id)) {
+                            ?>
+                                    <option value="<?php echo $catResult->name; ?>"><?php echo $catResult->name; ?></option>
+                            <?php }
+                            } ?>
+                        </select>
+                    </div>
 
+                    <div class="kd-form-group">
+                        <label>Max Price</label>
+                        <input type="number" id="kd-price-to" onchange="selectResultBasedPrice(event)" onkeyup="selectResultBasedPrice(event)">
+                    </div>
+                    <div class="kd-form-group">
+                        <label>Search</label>
+                        <input type="text" id="kd-search-field" onkeyup="selectResultBasedTitle(event)">
+                    </div>
+
+                    <div class="kd-form-group">
+                        <label>Date Time</label>
+                        <input type="text" id="kd-date-time-field" onchange="get_available_dates(event)">
+                    </div>
+
+                    <div class="kd-form-group">
+                        <label>&nbsp;</label>
+                        <button class="kd-reset-btn" onclick="resetSearch(event)">Reset Filters</button>
+                    </div>
+                </form>
             </div>
-        </div>
+
+            <div class="kd-searchbox-result home-demo">
+                <h3 class="hometitle kd-search-title d-none" id="myList">Search results</h3>
+                <div class="owl-theme kd-search-result-carousel">
+
+                </div>
+
+                <div class="kd-search-single-popup-wrapper">
+                    <div class="kd-search-single-popup-inner">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -558,7 +561,7 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                                                         <div class="rate">
                                                             <?php
                                                             $employeefullnamecard = $employeedetails->full_name;
-                                                          
+
                                                             $average1 = 0;
                                                             $reviewresult1 = $wpdb->get_results("SELECT * FROM `review_details` where user='$employeefullnamecard'");
                                                             foreach ($reviewresult1 as $row1) {
