@@ -884,7 +884,7 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
             thumbnail.classList.remove('kd-active-thumb')
         }
 
-        function kdOpenPopupFunc(e) {
+        function kdOpenPopupFunc(e , location="normal") {
             if (window.innerWidth > 1023) {
 
                 thumbnail = e.target
@@ -895,8 +895,13 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                         let thumbnails = Array.from(document.getElementsByClassName('kd-thumbnnail'))
                         let id = thumbnail.dataset.id
                         // 			console.log(id)
-                        let poppCont = document.getElementById(`kd-popup-${id}`)
-                        let poppBtn = document.getElementById(`amelia-popup-${id}`)
+                        
+                            let poppCont = document.getElementById(`kd-popup-${id}`)
+                        if(location!="normal"){
+                            poppCont =   document.getElementById(`kd-search-popup-${id}`)
+                        }
+                        
+                        let poppBtn = poppCont.getElementById(`amelia-popup-${id}`)
                         let popupContents = Array.from(document.getElementsByClassName('kd-popup-content'))
                         let kdCrWidth = document.querySelector('.kd-service-slide').clientWidth
                         popupContents.forEach(popupContent => {
@@ -911,7 +916,6 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                         poppBtn.click()
                         poppCont.classList.remove('hidden')
                         // thumbnail.parentElement.parentElement.classList.add('kd-active-popup-slide')
-                        console.log()
                         // console.log(window.innerWidth, getOffset(thumbnail).left)
                         if ((window.innerWidth - getOffset(thumbnail).left) < 600) {
                             poppCont.style.left = `auto`
