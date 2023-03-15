@@ -376,8 +376,12 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                 </div>
 
                 <div class="kd-form-group">
-                    <label>Time</label>
-                    <input type="text" id="kd-time-field" onchange="selectResultBasedDate(event)">
+                    <label>Date</label>
+                    <input type="date" id="kd-date-field" onchange="get_available_dates(event)">
+                </div>
+
+                <div class="kd-form-group" id="kd-slot-time-render">
+                    
                 </div>
 
                 <div class="kd-form-group">
