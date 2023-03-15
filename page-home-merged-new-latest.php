@@ -884,7 +884,7 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
             thumbnail.classList.remove('kd-active-thumb')
         }
 
-        function kdOpenPopupFunc(e , location="normal") {
+        function kdOpenPopupFunc(location="normal" , e) {
             console.log(location)
             if (window.innerWidth > 1023) {
 
