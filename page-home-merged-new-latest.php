@@ -1037,7 +1037,7 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                         if (videoImg.dataset.finalurl != '') {
                             let iframeWrapper = document.createElement('div')
                             iframeWrapper.classList.add('kd-iframe-wrapper')
-                            let iframe = `<iframe class="carouselvideo" onclick="alreadyClicked = true" width="310" height="170" src=${vidUrl} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
+                            let iframe = `<iframe class="carouselvideo" width="310" height="170" src=${vidUrl} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><div class="mute-button-overlay"></div>`
                             iframeWrapper.innerHTML = iframe
                             videoWrapper.insertBefore(iframeWrapper, videoImg)
                             videoImg.classList.add('hidden')
