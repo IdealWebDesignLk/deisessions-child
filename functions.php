@@ -907,8 +907,8 @@ if ( !function_exists( 'child_theme_configurator_css' ) ):
         wp_enqueue_style( 'chld_thm_cfg_child', trailingslashit( get_stylesheet_directory_uri() ) . 'style.css', array( 'hello-elementor','hello-elementor','hello-elementor-theme-style' ) );
     
 	// jquery time picker
-	wp_enqueue_style( 'jquery-time-picker-by-kd', 'https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css');
-	wp_enqueue_script( 'jquery-time-picker-sript-by-kd', 'https://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js');
+	wp_enqueue_style( 'jquery-time-picker-by-kd', get_stylesheet_directory_uri().'/kd-date-time-picker/jquery.datetimepicker.css');
+	wp_enqueue_script( 'jquery-time-picker-sript-by-kd', get_stylesheet_directory_uri().'/kd-date-time-picker/jquery.datetimepicker.js');
 	}
 endif;
 add_action( 'wp_enqueue_scripts', 'child_theme_configurator_css', 100 );
