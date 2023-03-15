@@ -901,7 +901,7 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                             poppCont =   document.getElementById(`kd-search-popup-${id}`)
                         }
                         
-                        let poppBtn = poppCont.getElementById(`amelia-popup-${id}`)
+                        let poppBtn = poppCont.querySelector(`#amelia-popup-${id}`)
                         let popupContents = Array.from(document.getElementsByClassName('kd-popup-content'))
                         let kdCrWidth = document.querySelector('.kd-service-slide').clientWidth
                         popupContents.forEach(popupContent => {
