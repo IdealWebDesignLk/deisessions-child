@@ -860,6 +860,10 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
 
 
     <script>
+        function muteCurrentVideo(e) {
+            console.log(e.target.previousElementSibling)
+        }
+
         function openFullscreenVideo() {
             let videoElement = document.getElementById('youtube-video')
             videoElement.requestFullscreen()
@@ -884,11 +888,11 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
             thumbnail.classList.remove('kd-active-thumb')
         }
 
-        function openSearchPopup(e){
-            kdOpenPopupFunc(e , "search")
+        function openSearchPopup(e) {
+            kdOpenPopupFunc(e, "search")
         }
 
-        function kdOpenPopupFunc(e , location="normal") {
+        function kdOpenPopupFunc(e, location = "normal") {
             if (window.innerWidth > 1023) {
 
                 thumbnail = e.target
@@ -899,12 +903,12 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                         let thumbnails = Array.from(document.getElementsByClassName('kd-thumbnnail'))
                         let id = thumbnail.dataset.id
                         // 			console.log(id)
-                        
-                            let poppCont = document.getElementById(`kd-popup-${id}`)
-                        if(location!="normal"){
-                            poppCont =   document.getElementById(`kd-search-popup-${id}`)
+
+                        let poppCont = document.getElementById(`kd-popup-${id}`)
+                        if (location != "normal") {
+                            poppCont = document.getElementById(`kd-search-popup-${id}`)
                         }
-                        
+
                         let poppBtn = poppCont.querySelector(`#amelia-popup-${id}`)
                         let popupContents = Array.from(document.getElementsByClassName('kd-popup-content'))
                         let kdCrWidth = document.querySelector('.kd-service-slide').clientWidth
@@ -1037,7 +1041,7 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                         if (videoImg.dataset.finalurl != '') {
                             let iframeWrapper = document.createElement('div')
                             iframeWrapper.classList.add('kd-iframe-wrapper')
-                            let iframe = `<iframe class="carouselvideo" width="310" height="170" src=${vidUrl} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><div class="mute-button-overlay"></div>`
+                            let iframe = `<iframe class="carouselvideo" width="310" height="170" src=${vidUrl} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><div class="mute-button-overlay" onclick="muteCurrentVideo(event)"></div>`
                             iframeWrapper.innerHTML = iframe
                             videoWrapper.insertBefore(iframeWrapper, videoImg)
                             videoImg.classList.add('hidden')
