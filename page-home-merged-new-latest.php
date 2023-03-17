@@ -861,12 +861,13 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
 
     <script>
         function muteCurrentVideo(e) {
-            console.log(e.target.previousElementSibling.src)
             let muteSeperated = e.target.previousElementSibling.src.split("&mute=1")
-            console.log(muteSeperated[1])
             muteSeperated.splice(1,1)
-            console.log(muteSeperated)
             e.target.previousElementSibling.src=muteSeperated.join()
+            let muteOverlays = Array.from(document.getElementsByClassName('mute-button-overlay'))
+            muteOverlays.forEach(mutebtn=>{
+                mutebtn.remove()
+            })
         }
 
         function openFullscreenVideo() {
