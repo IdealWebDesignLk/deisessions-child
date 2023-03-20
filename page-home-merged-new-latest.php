@@ -941,6 +941,7 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                             poppCont.style.right = `auto`
                             poppCont.style.left = `30px`
                         } else {
+                            console.log(`this is top offset ${getOffset(thumbnail).top}`)
                             poppCont.style.left = `${getOffset(thumbnail).left}px`
                             poppCont.style.top = `${getOffset(thumbnail).top}px`
                         }
