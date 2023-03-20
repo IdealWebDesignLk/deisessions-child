@@ -911,9 +911,9 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                         // 			console.log(id)
 
                         let poppCont = document.getElementById(`kd-popup-${id}`)
-                        if (location != "normal") {
-                            poppCont = document.getElementById(`kd-search-popup-${id}`)
-                        }
+                        // if (location != "normal") {
+                        //     poppCont = document.getElementById(`kd-search-popup-${id}`)
+                        // }
 
                         let poppBtn = poppCont.querySelector(`#amelia-popup-${id}`)
                         let popupContents = Array.from(document.getElementsByClassName('kd-popup-content'))
@@ -942,6 +942,7 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                             poppCont.style.left = `30px`
                         } else {
                             poppCont.style.left = `${getOffset(thumbnail).left}px`
+                            poppCont.style.top = `${getOffset(thumbnail).top}px`
                         }
 
                         // const yOffset = -200;
