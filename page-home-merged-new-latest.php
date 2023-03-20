@@ -935,11 +935,13 @@ $videosrc =  $server_name . '/wp-content/uploads/2022/09/pexels-artem-podrez-575
                         if ((window.innerWidth - getOffset(thumbnail).left) < 600) {
                             poppCont.style.left = `auto`
                             poppCont.style.right = `30px`
+                            poppCont.style.top = `${getOffset(thumbnail).top}px`
                             // const swiper = thumbnail.parentElement.parentElement.parentElement.parentElement.swiper;
                             // swiper.slideNext();
                         } else if (getOffset(thumbnail).left < 100) {
                             poppCont.style.right = `auto`
                             poppCont.style.left = `30px`
+                            poppCont.style.top = `${getOffset(thumbnail).top}px`
                         } else {
                             console.log(`this is top offset ${getOffset(thumbnail).top}`)
                             poppCont.style.left = `${getOffset(thumbnail).left}px`
